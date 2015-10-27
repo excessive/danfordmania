@@ -6,6 +6,8 @@ DanfordMania is Copyright (c) 2015 Colby Klein <shakesoda@gmail.com>.
 
 DanfordMania is Copyright (c) 2015 Landon Manning <lmanning17@gmail.com>.
 
+Bright Blue Sky (ScreenLogo background) is Copyright (c) 2015 CuteStockFootage.com; all rights reserved.
+
 # The MIT/X11 License (MIT)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
