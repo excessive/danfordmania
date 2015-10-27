@@ -1,1 +1,6 @@
-return LoadFont("common normal") .. { InitCommand=cmd(settext,"Disqualified!";); };
+return Def.BitmapText {
+	Font = "Common Normal",
+	InitCommand = function(self)
+		self:settext("Disqualified!")
+	end
+}

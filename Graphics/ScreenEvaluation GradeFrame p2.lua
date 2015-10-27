@@ -1,1 +1,5 @@
-return LoadActor("ScreenEvaluation GradeFrame p1") .. { InitCommand=cmd(zoomx,-1); }
+return LoadActor("ScreenEvaluation GradeFrame p1") .. {
+	InitCommand = function(self)
+		self:zoomx(-1)
+	end
+}

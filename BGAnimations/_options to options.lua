@@ -1,7 +1,11 @@
-local t = Def.ActorFrame {
-	LoadActor( THEME:GetPathS("", "_swoosh normal") ) .. {
-		StartTransitioningCommand=cmd(play);
-	};
-	Def.Actor { OnCommand=cmd(sleep,0.5); };
-};
-return t;
+return Def.ActorFrame {
+	OnCommand = function(self)
+		self:sleep(0.5)
+	end,
+	Def.Sound {
+		File = THEME:GetPathS("", "_swoosh normal"),
+		StartTransitioningCommand = function(self)
+			self:play()
+		end
+	}
+}

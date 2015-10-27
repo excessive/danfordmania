@@ -1,1 +1,3 @@
-return LoadActor( THEME:GetPathG("", "_header"), 'Test Input' );
+return Def.Sprite {
+	Texture = THEME:GetPathG("", "_header")
+}

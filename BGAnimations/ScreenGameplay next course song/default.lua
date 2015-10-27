@@ -1,14 +1,44 @@
-local t = Def.ActorFrame {
+return Def.ActorFrame {
 	Def.Quad {
-		InitCommand=cmd(diffuse,color("#000000");stretchto,SCREEN_LEFT,SCREEN_TOP,SCREEN_RIGHT,SCREEN_BOTTOM);
-		StartCommand=cmd(diffusealpha,0;sleep,1;linear,0.5;diffusealpha,1);
-		FinishCommand=cmd(sleep,1;linear,0.5;diffusealpha,0);
-	};
+		InitCommand = function(self)
+			self
+				:diffuse(color("#000000"))
+				:stretchto(SCREEN_LEFT, SCREEN_TOP, SCREEN_RIGHT, SCREEN_BOTTOM)
+		end,
+		StartCommand = function(self)
+			self
+				:diffusealpha(0)
+				:sleep(1)
+				:linear(0.5)
+				:diffusealpha(1)
+		end,
+		FinishCommand = function(self)
+			self
+				:sleep(1)
+				:linear(0.5)
+				:diffusealpha(0)
+		end
+	},
 	Def.Sprite {
-		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y);
-		BeforeLoadingNextCourseSongMessageCommand=function(self) self:LoadFromSongBanner( SCREENMAN:GetTopScreen():GetNextCourseSong() ) end;
-		StartCommand=cmd(scaletoclipped,512,160;diffusealpha,0;sleep,1;linear,0.5;diffusealpha,1);
-		FinishCommand=cmd(sleep,1;linear,0.5;diffusealpha,0);
-	};
-};
-return t;
+		InitCommand = function(self)
+			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		end,
+		BeforeLoadingNextCourseSongMessageCommand = function(self)
+			self:LoadFromSongBanner(SCREENMAN:GetTopScreen():GetNextCourseSong())
+		end,
+		StartCommand = function(self)
+			self
+				:scaletoclipped(512, 160)
+				:diffusealpha(0)
+				:sleep(1)
+				:linear(0.5)
+				:diffusealpha(1)
+		end,
+		FinishCommand = function(self)
+			self
+				:sleep(1)
+				:linear(0.5)
+				:diffusealpha(0)
+		end
+	}
+}

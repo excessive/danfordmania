@@ -1,7 +1,9 @@
-local t = Def.ActorFrame {
-	LoadActor( THEME:GetPathS("", "_swoosh normal") ) .. {
-		StartTransitioningCommand=cmd(play);
-	};
-	LoadActor( THEME:GetPathB("", "_fade out normal") );
-};
-return t;
+return Def.ActorFrame {
+	Def.Sound {
+		File = THEME:GetPathS("", "_swoosh normal"),
+		StartTransitioningCommand = function(self)
+			self:play()
+		end
+	},
+	LoadActor(THEME:GetPathB("", "_fade out normal"))
+}

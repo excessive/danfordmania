@@ -1,12 +1,26 @@
-local t = Def.ActorFrame {
-	LoadActor("white.png") .. {
-		OnCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;stretchto,SCREEN_LEFT,SCREEN_TOP,SCREEN_RIGHT,SCREEN_BOTTOM)
-	};
-	LoadActor("stepmania (dither).png") .. {
-		File="stepmania (dither).png",
-		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;diffusealpha,0),
-		OnCommand=cmd(linear,1;diffusealpha,1),
-	};
+return Def.ActorFrame {
+	Def.Sprite {
+		Texture = "background",
+	 	InitCommand = function(self)
+			self
+				:Center()
+				:FullScreen()
+		end
+	},
+	Def.Sprite {
+		Texture = "logo",
+		InitCommand = function(self)
+			self
+				:Center()
+				:FullScreen()
+				:blend(Blend.Add)
+				:sleep(6)
+		end
+	},
+	Def.Sound {
+		File = THEME:GetPathS("ScreenCompany", "music"),
+		InitCommand = function(self)
+			self:play()
+		end
+	}
 }
-
-return t

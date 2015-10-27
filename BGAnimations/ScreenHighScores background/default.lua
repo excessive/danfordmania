@@ -1,3 +1,8 @@
-return LoadActor( "bg" ) .. {
-	InitCommand = cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;)
+return Def.ActorFrame {
+	Def.Sprite {
+		Texture = "bg",
+		InitCommand = function(self)
+			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		end
+	}
 }

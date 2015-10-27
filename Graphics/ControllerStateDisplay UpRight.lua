@@ -1,3 +1,5 @@
-return LoadActor( THEME:GetPathG("ControllerStateDisplay","Center") ) .. {
-	InitCommand=cmd(x,8;y,-8);
-};
+return LoadActor(THEME:GetPathG("ControllerStateDisplay","Center") ) .. {
+	InitCommand = function(self)
+		self:xy(8, -8)
+	end
+}

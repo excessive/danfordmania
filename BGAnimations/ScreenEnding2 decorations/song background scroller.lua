@@ -1,20 +1,28 @@
 local template = Def.ActorFrame {
 	Def.Sprite {
-		OnCommand = cmd(LoadBackground,GetRandomSongBackground();scaletoclipped,226,165;y,0;);
-	};
-	LoadActor( "background frame" );
-}
-local t = Def.ActorScroller {
-	SecondsPerItem = 4.25;
-	NumItemsToDraw = 4;
-	TransformFunction = function( self, offset, itemIndex, numItems )
-		self:y(-188*offset)
-	end;
-	OnCommand = cmd(scrollwithpadding,2,3);
+		OnCommand = function(self)
+			self
+				:LoadBackground(GetRandomSongBackground())
+				:scaletoclipped(226,1 65)
+				:y(0)
+		end
+	},
+	LoadActor("background frame")
 }
 
-for i=1,10 do
-	table.insert( t, template );
+local frame = Def.ActorScroller {
+	SecondsPerItem = 4.25,
+	NumItemsToDraw = 4,
+	TransformFunction = function(self, offset, itemIndex, numItems)
+		self:y(-188 * offset)
+	end,
+	OnCommand = function(self)
+		self:scrollwithpadding(2, 3)
+	end
+}
+
+for i=1, 10 do
+	table.insert(frame, template)
 end
 
-return t;
+return frame

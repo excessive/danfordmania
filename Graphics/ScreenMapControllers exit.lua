@@ -1,10 +1,36 @@
-return LoadFont("Common Normal") .. {
-	Text="Exit";
-	InitCommand=cmd(x,SCREEN_CENTER_X;zoom,0.75;shadowlength,0;diffuse,color("#808080"));
-	OnCommand=cmd(diffusealpha,0;decelerate,0.5;diffusealpha,1);
-	OffCommand=cmd(stoptweening;accelerate,0.3;diffusealpha,0;queuecommand,"Hide");
-	HideCommand=cmd(hidden,true);
-
-	GainFocusCommand=cmd(diffuseshift;effectcolor2,color("#808080");effectcolor1,color("#FFFFFF"));
-	LoseFocusCommand=cmd(stopeffect);
-};
+return Def.BitmapText {
+	Text = "Exit",
+	Font = "Common Normal",
+	InitCommand = function(self)
+		self
+			:x(SCREEN_CENTER_X)
+			:zoom(0.75)
+			:shadowlength(0)
+			:diffuse(color("#808080"))
+	end,
+	OnCommand = function(self)
+		self
+			:diffusealpha(0)
+			:decelerate(0.5)
+			:diffusealpha(1)
+	end,
+	OffCommand = function(self)
+		self
+			:stoptweening()
+			:accelerate(0.3)
+			:diffusealpha(0)
+			:queuecommand("Hide")
+	end,
+	HideCommand = function(self)
+		self:hidden(true)
+	end,
+	GainFocusCommand = function(self)
+		self
+			:diffuseshift()
+			:effectcolor1(color("#FFFFFF"))
+			:effectcolor2(color("#808080"))
+	end,
+	LoseFocusCommand = function(self)
+		self:stopeffect()
+	end
+}

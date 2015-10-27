@@ -1,3 +1,6 @@
-return LoadFont("common normal") .. {
-	InitCommand=cmd(settext,"*";);
-};
+return Def.BitmapText {
+	Font = "Common Normal",
+	InitCommand = function(self)
+		self:settext("*")
+	end
+}

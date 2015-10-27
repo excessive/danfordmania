@@ -1,50 +1,51 @@
-local t = LoadFallbackB();
+local frame = LoadFallbackB()
 
-t[#t+1] = LoadActor( "settings pane" ) .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X-200;y,SCREEN_TOP;vertalign,top;);
-};
-t[#t+1] = LoadFont("Common", "normal") .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X-202;y,SCREEN_TOP+40;shadowlengthx,0;shadowlengthy,2;playcommand,"Set");
-	SetCommand=function(self)
-		local s = "";
+table.insert(frame, Def.Sprite {
+	Texture = "settings pane",
+	InitCommand = function(self)
+		self
+			:xy(SCREEN_CENTER_X - 200, SCREEN_TOP)
+			:vertalign(top)
+	end
+})
 
-		local fmt = THEME:GetString( Var "LoadingScreen", "%d songs in %d groups" );
-		local text = string.format( fmt, SONGMAN:GetNumSongs(), SONGMAN:GetNumSongGroups() )
+table.insert(frame, Def.BitmapText {
+	Font = "Common Normal",
+	InitCommand = function(self)
+		self
+			:xy(SCREEN_CENTER_X - 202, SCREEN_TOP + 40)
+			:shadowlengthx(0)
+			:shadowlengthy(2)
+			:playcommand("Set")
+	end,
+	SetCommand = function(self)
+		local s = string.format("StepMania %s", ProductVersion())
 
-		s = s .. text;
+		local fmt = THEME:GetString(Var "LoadingScreen", "%d songs in %d groups")
+		local text = string.format(fmt, SONGMAN:GetNumSongs(), SONGMAN:GetNumSongGroups())
+		s = s .. "\n" .. text
 
-		local fmt = THEME:GetString( Var "LoadingScreen", "%d courses in %d groups" );
-		local text = string.format( fmt,  SONGMAN:GetNumCourses(), SONGMAN:GetNumCourseGroups() )
+		local fmt = THEME:GetString(Var "LoadingScreen", "%d courses in %d groups")
+		local text = string.format(fmt, SONGMAN:GetNumCourses(), SONGMAN:GetNumCourseGroups())
+		s = s .. "\n" .. text
 
-		s = s .. "\n" .. text;
+		local fmt = THEME:GetString(Var "LoadingScreen", "Difficulty:")
+		local text = fmt .. " " .. GetTimingDifficulty()
+		s = s .. "\n" .. text
 
-		if PREFSMAN:GetPreference("UseUnlockSystem") then
-			local fmt = THEME:GetString( Var "LoadingScreen", "%d unlocks" );
-			local text = string.format( fmt, UNLOCKMAN:GetNumUnlocks() )
-			s = s .. "\n" .. text;
-		end
+		self:settext(s)
+	end
+})
 
-		local fmt = THEME:GetString( Var "LoadingScreen", "Gametype:" );
-		local text = fmt .. " " .. GAMESTATE:GetCurrentGame():GetName();
-		s = s .. "\n" .. text;
-		
-		local fmt = THEME:GetString( Var "LoadingScreen", "Difficulty:" );
-		local text = fmt .. " " .. GetTimingDifficulty();
-		s = s .. "\n" .. text;
+table.insert(frame, Def.BitmapText {
+	Font = "Common Normal",
+	InitCommand = function(self)
+		self
+			:xy(SCREEN_LEFT + 20, SCREEN_TOP + 36)
+			:horizalign(left)
+			:diffuse(0.6, 0.6, 0.6, 1)
+			:shadowlength(2)
+	end
+})
 
-		self:settext( s )
-	end;
-};
-t[#t+1] = LoadFont("Common", "normal") .. {
-	InitCommand=cmd(x,SCREEN_LEFT+20;y,SCREEN_TOP+36;horizalign,left;diffuse,0.6,0.6,0.6,1;shadowlength,2);
-};
-t[#t+1] = Def.ActorFrame {
-       InitCommand=cmd(x,SCREEN_CENTER_X+210;y,SCREEN_CENTER_Y+200;);
-       LoadActor( "stepmania logo" ) .. {
-       };
-       LoadFont( "common normal" ) .. {
-               InitCommand=cmd(y,-25;settext,ProductID() .. " " .. ProductVersion();diffuse,color("#000000");shadowlength,0;);
-       };
-};
-
-return t;
+return frame

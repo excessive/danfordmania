@@ -1,10 +1,20 @@
 return Def.ActorFrame {
-	LoadActor("focus") .. {
-		GainFocusCommand=cmd(visible,true;);
-		LoseFocusCommand=cmd(visible,false;);
-	};
-	LoadActor("nofocus") .. {
-		GainFocusCommand=cmd(visible,false;);
-		LoseFocusCommand=cmd(visible,true;);
-	};
-};
+	Def.Sprite {
+		Texture = "focus",
+		GainFocusCommand = function(self)
+			self:visible(true)
+		end,
+		LoseFocusCommand = function(self)
+			self:visible(false)
+		end
+	},
+	Def.Sprite {
+		Texture = "nofocus",
+		GainFocusCommand = function(self)
+			self:visible(false)
+		end,
+		LoseFocusCommand = function(self)
+			self:visible(true)
+		end
+	}
+}

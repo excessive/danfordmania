@@ -1,3 +1,5 @@
-local fSeconds = ScreenMetric("InDelay");
-return Def.Actor { OnCommand=cmd(sleep,fSeconds); };
-
+return Def.Actor {
+	OnCommand = function(self)
+		self:sleep(ScreenMetric("InDelay"))
+	end
+}

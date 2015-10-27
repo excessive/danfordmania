@@ -1,3 +1,6 @@
-return LoadActor( "caution" ) .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;);
+return Def.Sprite {
+	Texture = "caution",
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+	end
 }

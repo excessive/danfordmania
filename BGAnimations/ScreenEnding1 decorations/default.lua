@@ -1,50 +1,65 @@
-local fontPath = THEME:GetPathF( "Common", "normal" )
-local songs = tableslice( tableshuffle( SONGMAN:GetAllSongs() ), 100 );
-local spacing_y = 24;
-local num_items_to_draw = math.ceil( 480 / spacing_y );
-local num_padding_items = (num_items_to_draw/2)+2;
+local fontPath = THEME:GetPathF("Common", "Normal")
+local songs = tableslice(tableshuffle(SONGMAN:GetAllSongs()), 100)
+local spacing_y = 24
+local num_items_to_draw = math.ceil(480 / spacing_y)
+local num_padding_items = (num_items_to_draw / 2) + 2
 local seconds_per_item = 0.1
-local begin_fading_out_seconds = (#songs + num_padding_items * 2) * seconds_per_item;
+local begin_fading_out_seconds = (#songs + num_padding_items * 2) * seconds_per_item
 
-local t = LoadFallbackB();
-t[#t+1] = Def.ActorFrame {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;);
-	BeginCommand=function(self)
-		SCREENMAN:GetTopScreen():PostScreenMessage( "SM_BeginFadingOut", begin_fading_out_seconds );
-	end;
-	LoadActor("bg") .. {
-		InitCommand=cmd();
-	};
+local frame = LoadFallbackB()
+
+table.insert(frame, Def.ActorFrame {
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+	end,
+	BeginCommand = function(self)
+		SCREENMAN
+			:GetTopScreen()
+			:PostScreenMessage("SM_BeginFadingOut", begin_fading_out_seconds)
+	end,
+	LoadActor("bg"),
 	LoadActor("char left") .. {
-		InitCommand=cmd(x,-250+4;y,50+4;);
-	};
+		InitCommand = function(self)
+			self:xy(-250 + 4, 50 + 4)
+		end
+	},
 	LoadActor("char right") .. {
-		InitCommand=cmd(x,250+10;y,50+7;);
-	};
-};
-
-
-local t2 = Def.ActorScroller {
-	NumItemsToDraw = num_items_to_draw;
-	SecondsPerItem = seconds_per_item;
-	TransformFunction = function( self, offset, itemIndex, numItems )
-		self:y( offset*spacing_y )
-	end;
-	BeginCommand = cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;scrollwithpadding,num_padding_items,num_padding_items);
+		InitCommand = function(self)
+			self:xy(250 + 10, 50 + 7)
+		end
+	}
 }
 
-for i=1,#songs do
-	local song = songs[i];
-	local c = SONGMAN:GetSongColor( song )
-	local text = Def.BitmapText {
-		_Level = 1;
-		File = fontPath;
-		InitCommand = cmd(settext,song:GetDisplayFullTitle();diffuse,c;strokecolor,color("#575100");shadowlength,0;);
-	}
-		
-	table.insert( t2, Def.ActorFrame { text } )
+
+local scroller = Def.ActorScroller {
+	NumItemsToDraw = num_items_to_draw,
+	SecondsPerItem = seconds_per_item,
+	TransformFunction = function(self, offset, itemIndex, numItems)
+		self:y(offset * spacing_y)
+	end,
+	BeginCommand = function(self)
+		self
+			:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+			:scrollwithpadding(num_padding_items, num_padding_items)
+	end
+}
+
+for i, song in ipairs(songs) do
+	table.insert(scroller, Def.ActorFrame {
+		Def.BitmapText {
+			_Level = 1,
+			File = fontPath,
+			InitCommand = function(self)
+				self
+					:settext(song:GetDisplayFullTitle())
+					:diffuse(SONGMAN:GetSongColor(song))
+					:strokecolor(color("#575100"))
+					:shadowlength(0)
+			end
+		}
+	})
 end
 
-t[#t+1] = t2;
+table.insert(frame, scroller)
 
-return t;
+return frame

@@ -1,10 +1,15 @@
-local t = LoadFallbackB();
-t[#t+1] = LoadActor("bg") .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;);
-};
-t[#t+1] = LoadActor( "picture scroller" ) .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-20;);
-};
+local frame = LoadFallbackB()
 
+table.insert(frame, LoadActor("bg") .. {
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+	end
+})
 
-return t;
+table.insert(frame, LoadActor("picture scroller") .. {
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y - 20)
+	end
+})
+
+return frame

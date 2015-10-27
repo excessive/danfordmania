@@ -1,17 +1,34 @@
-local t = LoadFallbackB();
-t[#t+1] = LoadActor("bg") .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;);
-};
-t[#t+1] = LoadActor( "song background scroller" ) .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X-174;y,SCREEN_CENTER_Y;);
-};
-t[#t+1] = LoadActor( "credits" ) .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X+114;y,SCREEN_CENTER_Y;);
-};
-t[#t+1] = LoadActor("team") .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y-30;);
-	OnCommand=cmd(sleep,1;decelerate,0.7;addx,274;rotationz,90;);
-};
+local frame = LoadFallbackB()
 
+table.insert(frame, LoadActor("bg") .. {
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+	end
+})
 
-return t;
+table.insert(frame, LoadActor( "song background scroller" ) .. {
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X - 174, SCREEN_CENTER_Y)
+	end
+})
+
+table.insert(frame, LoadActor( "credits" ) .. {
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X + 114, SCREEN_CENTER_Y)
+	end
+})
+
+table.insert(frame, LoadActor("team") .. {
+	InitCommand = function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y - 30)
+	end,
+	OnCommand = function(self)
+		self
+			:sleep(1)
+			:decelerate(0.7)
+			:addx(274)
+			:rotationz(90)
+	end
+})
+
+return frame

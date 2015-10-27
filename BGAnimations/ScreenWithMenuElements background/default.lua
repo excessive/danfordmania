@@ -1,5 +1,8 @@
 return Def.ActorFrame {
-	LoadActor( "bg" ) .. {
-		OnCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y);
-	};
-};
+	Def.Sprite {
+		Texture = "bg",
+		OnCommand = function(self)
+			self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		end
+	}
+}

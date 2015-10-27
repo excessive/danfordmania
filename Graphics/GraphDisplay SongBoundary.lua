@@ -1,3 +1,8 @@
 return Def.Quad {
-	InitCommand=cmd(zoomtowidth,2;zoomtoheight,76;diffuse,color("#FFFFFF77"););
-};
+	InitCommand = function(self)
+		self
+			:zoomtowidth(2)
+			:zoomtoheight(76)
+			:diffuse(color("#FFFFFF77"))
+	end
+}

@@ -1,10 +1,21 @@
-local jl = Var "JudgmentLine";
+local jl = Var "JudgmentLine"
 
 return Def.ActorFrame {
 	LoadActor("frame") .. {
-		InitCommand=cmd(y,4;);
-	};
-	LoadFont("_sf square head 13px") .. {
-		InitCommand=cmd(y,2;settext,string.upper(JudgmentLineToLocalizedString(jl));diffuse,JudgmentLineToColor(jl);strokecolor,JudgmentLineToStrokeColor(jl);shadowlength,0;maxwidth,180);
-	};
-};
+		InitCommand = function(self)
+			self:y(4)
+		end
+	},
+	Def.BitmapText {
+		Font = "_sf square head 13px",
+		InitCommand = function(self)
+			self
+				:y(2)
+				:settext(string.upper(JudgmentLineToLocalizedString(jl)))
+				:diffuse(JudgmentLineToColor(jl))
+				:strokecolor(JudgmentLineToStrokeColor(jl))
+				:shadowlength(0)
+				:maxwidth(180)
+		end
+	}
+}

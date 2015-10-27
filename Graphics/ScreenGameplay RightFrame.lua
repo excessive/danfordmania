@@ -1,3 +1,5 @@
 return LoadActor("ScreenGameplay LeftFrame") .. {
-	InitCommand=cmd(zoomx,-1;);
-};
+	InitCommand = function(self)
+		self:zoomx(-1)
+	end
+}

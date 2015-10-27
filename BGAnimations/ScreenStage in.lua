@@ -1,1 +1,5 @@
-return Def.Actor { StartTransitioningCommand=cmd(sleep,2;); }
+return Def.Actor {
+	StartTransitioningCommand = function(self)
+		self:sleep(2)
+	end
+}

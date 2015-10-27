@@ -1,30 +1,50 @@
-local t = LoadFallbackB();
+local frame = LoadFallbackB()
 
-t[#t+1] = StandardDecorationFromFile( "StageFrame", "StageFrame" );
+table.insert(frame, StandardDecorationFromFile("StageFrame", "StageFrame"))
 
-t[#t+1] = LoadActor("_warning") .. {
-	InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;
-		vertalign,top;
-		wag;effectmagnitude,0,0,10;effectperiod,2;
-	);
-	OnCommand=cmd(diffusealpha,0);
-	ShowDangerAllMessageCommand=cmd(stoptweening;accelerate,0.3;diffusealpha,1);
-	HideDangerAllMessageCommand=cmd(stoptweening;accelerate,0.3;diffusealpha,0);
-};
-	
-t[#t+1] = StandardDecorationFromFile( "LifeFrame", "LifeFrame" );
-t[#t+1] = StandardDecorationFromFile( "ScoreFrame", "ScoreFrame" );
-t[#t+1] = StandardDecorationFromFile( "LeftFrame", "LeftFrame" );
-t[#t+1] = StandardDecorationFromFile( "RightFrame", "RightFrame" );
+table.insert(frame, Def.Sprite {
+	Texture = "_warning",
+	InitCommand = function(self)
+		self
+			:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+			:vertalign(top)
+			:wag()
+			:effectmagnitude(0, 0, 10)
+			:effectperiod(2)
+	end,
+	OnCommand = function(self)
+		self:diffusealpha(0)
+	end,
+	ShowDangerAllMessageCommand = function(self)
+		self
+			:stoptweening()
+			:accelerate(0.3)
+			:diffusealpha(1)
+	end,
+	HideDangerAllMessageCommand = function(self)
+		self
+			:stoptweening()
+			:accelerate(0.3)
+			:diffusealpha(0)
+	end
+})
 
+table.insert(frame, StandardDecorationFromFile("LifeFrame", "LifeFrame"))
+table.insert(frame, StandardDecorationFromFile("ScoreFrame", "ScoreFrame"))
+table.insert(frame, StandardDecorationFromFile("LeftFrame", "LeftFrame"))
+table.insert(frame, StandardDecorationFromFile("RightFrame", "RightFrame"))
 
 if ShowStandardDecoration("ModIconRows") then
 	for pn in ivalues(PlayerNumber) do
-		local t2 = Def.ModIconRow {
-				InitCommand=cmd(Load,"ModIconRowGameplay"..ToEnumShortString(pn),pn);
-			};	
-		t[#t+1] = StandardDecorationFromTable( "ModIconRow" .. ToEnumShortString(pn), t2 );
+		table.insert(frame,
+			StandardDecorationFromTable("ModIconRow" .. ToEnumShortString(pn),
+			Def.ModIconRow {
+				InitCommand = function(self)
+					self:Load("ModIconRowGameplay" .. ToEnumShortString(pn), pn)
+				end
+			})
+		)
 	end
 end
 
-return t;
+return frame

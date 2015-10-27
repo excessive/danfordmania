@@ -1,14 +1,21 @@
 return Def.ActorFrame {
-	--Def.ControllerStateDisplay {
-	--	InitCommand=cmd(LoadGameController,
-	--};
 	Def.DeviceList {
-		Font="Common normal";
-		InitCommand=cmd(x,SCREEN_LEFT+20;y,SCREEN_TOP+80;zoom,1.4;horizalign,left);
-	};
-
+		Font = "Common Normal",
+		InitCommand = function(self)
+			self
+				:xy(SCREEN_LEFT + 20, SCREEN_TOP + 80)
+				:zoom(1.4)
+				:horizalign(left)
+		end
+	},
 	Def.InputList {
-		Font="Common normal";
-		InitCommand=cmd(x,SCREEN_CENTER_X-250;y,SCREEN_CENTER_Y;zoom,1.4;horizalign,left;vertspacing,8);
-	};
-};
+		Font = "Common Normal",
+		InitCommand = function(self)
+			self
+				:xy(SCREEN_CENTER_X - 250, SCREEN_CENTER_Y)
+				:zoom(1.4)
+				:horizalign(left)
+				:vertspacing(8)
+		end
+	}
+}
