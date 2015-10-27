@@ -1,10 +1,10 @@
 # Licenses
 
-Original assets are Copyright (c) 2009 Chris Danford <chrisdanford@gmail.com>.
+Original assets are Copyright (c) 2009 Chris Danford \<chrisdanford@gmail.com\>.
 
-DanfordMania is Copyright (c) 2015 Colby Klein <shakesoda@gmail.com>.
+DanfordMania is Copyright (c) 2015 Colby Klein \<shakesoda@gmail.com\>.
 
-DanfordMania is Copyright (c) 2015 Landon Manning <lmanning17@gmail.com>.
+DanfordMania is Copyright (c) 2015 Landon Manning \<lmanning17@gmail.com\>.
 
 Bright Blue Sky (ScreenLogo background) is Copyright (c) 2015 CuteStockFootage.com; all rights reserved.
 
