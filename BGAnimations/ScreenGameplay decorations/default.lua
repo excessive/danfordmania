@@ -30,6 +30,7 @@ table.insert(frame, Def.Sprite {
 })
 
 table.insert(frame, StandardDecorationFromFile("LifeFrame", "LifeFrame"))
+--[[
 table.insert(frame, StandardDecorationFromFile("ScoreFrame", "ScoreFrame"))
 table.insert(frame, StandardDecorationFromFile("LeftFrame", "LeftFrame"))
 table.insert(frame, StandardDecorationFromFile("RightFrame", "RightFrame"))
@@ -46,5 +47,6 @@ if ShowStandardDecoration("ModIconRows") then
 		)
 	end
 end
+--]]
 
 return frame

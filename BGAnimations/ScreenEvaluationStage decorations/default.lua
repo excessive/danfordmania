@@ -150,7 +150,7 @@ if ShowStandardDecoration("TimingDifficulty") then
 		}
 	))
 end
-
+--[[
 if ShowStandardDecoration("ModIconRows") then
 	for pn in ivalues(PlayerNumber) do
 		table.insert(frame, StandardDecorationFromTable(
@@ -163,7 +163,7 @@ if ShowStandardDecoration("ModIconRows") then
 		))
 	end
 end
-
+--]]
 if ShowStandardDecoration("StepsDisplay") then
 	for pn in ivalues(PlayerNumber) do
 		table.insert(frame, StandardDecorationFromTable(

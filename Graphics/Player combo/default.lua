@@ -4,10 +4,6 @@ local ShowComboAt = THEME:GetMetric("Combo", "ShowComboAt");
 local ShowMissesAt = THEME:GetMetric("Combo", "ShowMissesAt");
 local Pulse = THEME:GetMetric("Combo", "PulseCommand");
 
-local NumberMinZoom = THEME:GetMetric("Combo", "NumberMinZoom");
-local NumberMaxZoom = THEME:GetMetric("Combo", "NumberMaxZoom");
-local NumberMaxZoomAt = THEME:GetMetric("Combo", "NumberMaxZoomAt");
-
 local t = Def.ActorFrame {
 	LoadFont( "Combo", "ComboNumber" ) .. {
 		Name="ComboNumber";
@@ -48,7 +44,7 @@ local t = Def.ActorFrame {
 		else
 			ShowAt = ShowMissesAt;
 		end
-		
+
 		if not iNum  or  ShowAt == 0  or  iNum < ShowAt then
 			return;
 		end
@@ -65,17 +61,14 @@ local t = Def.ActorFrame {
 		else
 			Label = c.MissesLabel;
 		end
-		
-		param.Zoom = scale( iNum, 0, NumberMaxZoomAt, NumberMinZoom, NumberMaxZoom );
-		param.Zoom = clamp( param.Zoom, NumberMinZoom, NumberMaxZoom );
 
 		Number:visible(true);
 		Label:visible(true);
 
 		Number:settext( string.format("%i", iNum) );
 
-		Pulse( Number, param );
-		Pulse( Label, param );
+		Pulse( Number, 0.5 );
+		Pulse( Label, 0.5 );
 	end;
 };
 
